@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket       = "kode-catalyst-terraform-state"
-    key          = "three-tier-infra/terraform.tfstate"
+    key          = "aws-three-tier-infrastructure/terraform.tfstate"
     region       = "eu-north-1"
     use_lockfile = true
     encrypt      = true

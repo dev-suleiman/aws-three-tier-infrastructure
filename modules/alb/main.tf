@@ -5,26 +5,13 @@ resource "aws_security_group" "alb" {
   description = "Security group for ${var.name} ALB in ${var.environment}"
   vpc_id      = var.vpc_id
 
-  dynamic "ingress" {
-    for_each = var.ingress_security_group_id != null ? [1] : []
-    content {
-      description     = "Traffic from upstream security group"
-      from_port       = var.target_port
-      to_port         = var.target_port
-      protocol        = "tcp"
-      security_groups = [var.ingress_security_group_id]
-    }
-  }
-
-  dynamic "ingress" {
-    for_each = var.ingress_security_group_id == null ? [1] : []
-    content {
-      description = "Traffic from CIDR"
-      from_port   = var.target_port
-      to_port     = var.target_port
-      protocol    = "tcp"
-      cidr_blocks = [var.ingress_cidr]
-    }
+  ingress {
+    from_port       = var.target_port
+    to_port         = var.target_port
+    protocol        = "tcp"
+    cidr_blocks     = var.ingress_security_group_id == null ? [var.ingress_cidr] : []
+    security_groups = var.ingress_security_group_id != null ? [var.ingress_security_group_id] : []
+    description     = "Ingress rule"
   }
 
   egress {

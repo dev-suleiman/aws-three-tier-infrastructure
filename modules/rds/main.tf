@@ -87,7 +87,7 @@ resource "aws_db_instance" "main" {
   skip_final_snapshot    = false
   final_snapshot_identifier = "${var.environment}-postgres-final-snapshot"
 
-  deletion_protection = true
+  deletion_protection = false
 
   tags = {
     Name        = "${var.environment}-postgres"
