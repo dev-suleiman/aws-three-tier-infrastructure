@@ -2,6 +2,9 @@
 # AWS Three-Tier Infrastructure
 ## Architecture
 
+![Architecture Diagram](architecture-diagram.png)
+
+
 The infrastructure follows a three-tier model deployed across two Availability Zones:
 
 - **Presentation tier** : internet-facing Application Load Balancer routes traffic to web servers in private subnets
